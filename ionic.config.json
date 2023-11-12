@@ -1,0 +1,7 @@
+{
+  "name": "teloprestoracmobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

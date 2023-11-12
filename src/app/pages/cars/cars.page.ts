@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Car } from 'src/app/models/car';
+import { CarService } from 'src/app/services/car.service';
 
 @Component({
   selector: 'app-cars',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarsPage implements OnInit {
 
-  constructor() { }
+  cars !: Car[];
+
+  constructor(
+    private carService : CarService,
+    private router : Router,
+  ) { }
 
   ngOnInit() {
+    this.cars = this.carService.getAllCars();
+  }
+  goToHome(){
+    this.router.navigateByUrl('home')
   }
 
 }

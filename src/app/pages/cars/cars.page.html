@@ -1,13 +1,15 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>cars</ion-title>
+    <ion-title>Lista de vehículos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">cars</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-button (click)="goToHome();"> Volver al Inicio </ion-button>
+  <ion-list>
+    <ion-item *ngFor = "let car of cars">
+      <ion-label>{{car.brand}} {{car.model}}</ion-label>
+      <ion-button [disabled] = "!car.avalaible" [routerLink] = "['/cars',car.id]">ver detalles</ion-button>
+    </ion-item>
+  </ion-list>
 </ion-content>

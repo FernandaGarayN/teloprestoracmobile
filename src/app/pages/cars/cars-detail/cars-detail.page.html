@@ -1,13 +1,26 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>cars-detail</ion-title>
+    <ion-title>Detalle de vehiculo</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">cars-detail</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-button (click)="goToCars();"> Volver a la lista de Vehículos </ion-button>
+  <ion-card *ngIf="car">
+    <ion-card-content>
+      <ion-card-title>{{ car.brand }}</ion-card-title>
+      <ion-card-subtitle>{{ car.model }}</ion-card-subtitle>
+    </ion-card-content>
+    <ion-card-content>
+      <p>Año: {{ car.year }}</p>      
+      <p>Precio: {{ car.price }}</p>  
+      <p>Color: {{ car.color }}</p> 
+      <p>Patente: {{ car.plateCode }}</p> 
+      <p>Disponible: {{ car.avalaible ? 'Sí' : 'No' }}</p>
+    </ion-card-content>
+  </ion-card>
+  <div *ngIf="!car" class="ion-text-center">
+    <p>El vehículo no existe o no se ha cargado.</p>
+  </div>
 </ion-content>
+

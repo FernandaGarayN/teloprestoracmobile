@@ -17,7 +17,17 @@ const routes: Routes = [
   },
   {
     path: 'cars',
-    loadChildren: () => import('./pages/cars/cars.module').then( m => m.CarsPageModule)
+    children:[
+      {
+        path: '',
+        loadChildren: () => import('./pages/cars/cars.module').then( m => m.CarsPageModule)
+      },
+      {
+        path:':carId',
+        loadChildren: () => import('./pages/cars/cars-detail/cars-detail.module').then( m => m.CarsDetailPageModule)
+      }
+    ]
+   
   },
 ];
 

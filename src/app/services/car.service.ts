@@ -32,5 +32,9 @@ export class CarService {
     return [...this.cars];
   }
 
+  getCar(carId: number): Car | undefined {
+    return this.cars.find(car => car.id   === carId);
+  }
+
   constructor() {}
 }

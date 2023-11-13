@@ -11,18 +11,19 @@ import { CarService } from 'src/app/services/car.service';
 })
 export class CarsPage implements OnInit {
 
-  cars$ !: Observable<Car[]>;
+  cars$!: Observable<Car[]>;
 
   constructor(
-    private carService : CarService,
-    private router : Router,
+    private carService: CarService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
     this.cars$ = this.carService.getAllCars();
   }
-  goToHome(){
-    this.router.navigateByUrl('home')
+
+  goToHome() {
+    this.router.navigateByUrl('home');
   }
 
 }

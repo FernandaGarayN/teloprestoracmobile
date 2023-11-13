@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Car } from 'src/app/models/car';
 import { CarService } from 'src/app/services/car.service';
 
@@ -10,7 +11,7 @@ import { CarService } from 'src/app/services/car.service';
 })
 export class CarsPage implements OnInit {
 
-  cars !: Car[];
+  cars$ !: Observable<Car[]>;
 
   constructor(
     private carService : CarService,
@@ -18,7 +19,7 @@ export class CarsPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.cars = this.carService.getAllCars();
+    this.cars$ = this.carService.getAllCars();
   }
   goToHome(){
     this.router.navigateByUrl('home')

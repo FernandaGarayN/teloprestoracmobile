@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "teloprestoracmobile"
+  },
+  "targets": {
+    "teloprestoracmobile": {
+      "hosting": {
+        "app": [
+          "teloprestoracmobile"
+        ]
+      }
+    }
+  }
+}

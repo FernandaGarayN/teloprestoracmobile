@@ -1,10 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Car } from '../models/car';
+import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CarService {
+  firestore: Firestore = inject(Firestore);
+  cars$: Observable<Car[]>;
   public cars: Car[] = [
     {
       id: 1,
@@ -29,12 +33,15 @@ export class CarService {
   ];
 
   getAllCars(){
-    return [...this.cars];
+    return this.cars$;
   }
 
   getCar(carId: number): Car | undefined {
     return this.cars.find(car => car.id   === carId);
   }
 
-  constructor() {}
+  constructor() {
+    const acollection = collection(this.firestore, 'cars');
+    this.cars$ = collectionData(acollection) as Observable<Car[]>;
+  }
 }

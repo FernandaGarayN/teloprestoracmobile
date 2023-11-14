@@ -12,6 +12,9 @@ import { CarService } from 'src/app/services/car.service';
 export class CarsPage implements OnInit {
 
   cars$!: Observable<Car[]>;
+  enableDelete: boolean = false;
+  carsToDelete: string [] = [];
+
 
   constructor(
     private carService: CarService,
@@ -27,6 +30,22 @@ export class CarsPage implements OnInit {
   }
   goToNew() {
     this.router.navigateByUrl('cars/new');
+  }
+  enableDeleteFn(){
+    this.enableDelete = true;
+  }
+  deleteCars() {
+    this.carsToDelete.forEach(carId => this.carService.deleteCar(carId))
+    this.carsToDelete = [];
+    this.enableDelete = false;
+  }
+  toggleDelete(car: Car) {
+    // Verificar si el coche ya está en la lista para eliminar
+    if (this.carsToDelete.includes(car.id)) {
+      this.carsToDelete = this.carsToDelete.filter(c => c !== car.id);
+    } else {
+      this.carsToDelete.push(car.id);
+    }
   }
 
 }

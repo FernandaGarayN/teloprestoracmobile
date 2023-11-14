@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Car } from '../models/car';
-import { Firestore, addDoc, collection, collectionData, doc, docData } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, docData, setDoc } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 
@@ -23,6 +23,14 @@ export class CarService {
   async addCar(newCar: Car): Promise<void> {
     const collectionRef = collection(this.firestore, 'cars');
     await addDoc(collectionRef, newCar);
+  }
+  async updateCar(carId: string, updatedCar: Car): Promise<void> {
+    const carRef = doc(this.firestore, 'cars', carId);
+    await setDoc(carRef, updatedCar);
+  }
+  async deleteCar(carId: string): Promise<void> {
+    const carRef = doc(this.firestore, 'cars', carId);
+    await deleteDoc(carRef);
   }
 
   constructor() {

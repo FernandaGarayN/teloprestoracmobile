@@ -5,6 +5,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-badge *ngIf="errorMessage" color="danger">{{errorMessage}}</ion-badge>
   <form [formGroup]="credentials">
     <ion-input type="text" placeHolder="@" formControlName="email"></ion-input>
     <ion-input type="text" placeHolder="pass (se ve)" formControlName="password"></ion-input>

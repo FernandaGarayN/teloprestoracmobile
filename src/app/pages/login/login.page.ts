@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginPage implements OnInit {
 
   credentials !: FormGroup;
-
+  errorMessage !: string;
   constructor(
     private authService : AuthService,
     private router : Router,
@@ -44,6 +44,7 @@ export class LoginPage implements OnInit {
       this.router.navigateByUrl('/home',{replaceUrl:true});
     }else{
       console.log("error al ingresar");
+      this.errorMessage ="Correo y o contraseña invalido";
     }
   }
 

@@ -6,5 +6,5 @@ export class Car {
     price!: number;
     color!: string;
     plateCode!: string; 
-    avalaible!: boolean;
+    available!: boolean;
 }

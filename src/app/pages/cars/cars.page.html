@@ -13,6 +13,7 @@
       <ion-checkbox (ionChange)="toggleDelete(car)" *ngIf = "enableDelete" labelPlacement="end"></ion-checkbox>
       <ion-label>{{car.brand}} {{car.model}}</ion-label>
       <ion-button [disabled] = "!car.available" [routerLink] = "['/cars',car.id]">ver detalles</ion-button>
+      <ion-button [routerLink]="['/cars/edit',car.id]">Editar</ion-button>
 
     </ion-item>
   </ion-list>

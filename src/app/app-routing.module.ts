@@ -28,6 +28,10 @@ const routes: Routes = [
         loadChildren: () => import('./pages/cars/newcar/newcar.module').then( m => m.NewcarPageModule)
       },
       {
+        path:'edit/:carId',
+        loadChildren: () => import('./pages/cars/editcar/editcar.module').then( m => m.EditcarPageModule)
+      },
+      {
         path:':carId',
         loadChildren: () => import('./pages/cars/cars-detail/cars-detail.module').then( m => m.CarsDetailPageModule)
       }      

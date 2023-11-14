@@ -6,10 +6,11 @@
 
 <ion-content [fullscreen]="true">
   <ion-button (click)="goToHome();"> Volver al Inicio </ion-button>
+  <ion-button (click)="goToNew();"> Nuevo vehículo </ion-button>
   <ion-list>
     <ion-item *ngFor = "let car of cars$ | async">
       <ion-label>{{car.brand}} {{car.model}}</ion-label>
-      <ion-button [disabled] = "!car.avalaible" [routerLink] = "['/cars',car.id]">ver detalles</ion-button>
+      <ion-button [disabled] = "!car.available" [routerLink] = "['/cars',car.id]">ver detalles</ion-button>
     </ion-item>
   </ion-list>
 </ion-content>

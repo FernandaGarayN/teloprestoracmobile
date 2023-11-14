@@ -25,5 +25,8 @@ export class CarsPage implements OnInit {
   goToHome() {
     this.router.navigateByUrl('home');
   }
+  goToNew() {
+    this.router.navigateByUrl('cars/new');
+  }
 
 }

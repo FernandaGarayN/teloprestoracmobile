@@ -18,7 +18,7 @@ export class CarsDetailPage implements OnInit {
     this.activatedRoute.paramMap.subscribe(paramMap => {
       const carId = paramMap.get('carId');
       if (carId !== null) {
-        this.car = this.carService.getCar(parseInt(carId, 10));
+        this.carService.getCar(carId).subscribe(car => this.car = car);
         console.log(this.car);
       }
     });

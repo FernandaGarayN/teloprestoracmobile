@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Nuevo Vehículo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="carForm" (ngSubmit)="addCar()">
+    <ion-item>
+      <ion-label position="floating">Marca</ion-label>
+      <ion-input formControlName="brand" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Modelo</ion-label>
+      <ion-input formControlName="model" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Año</ion-label>
+      <ion-input formControlName="year" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Precio</ion-label>
+      <ion-input formControlName="price" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Color</ion-label>
+      <ion-input formControlName="color" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Placa patente</ion-label>
+      <ion-input formControlName="plateCode" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Disponible</ion-label>
+      <ion-checkbox formControlName="available"></ion-checkbox>
+    </ion-item>
+
+    <ion-button type="submit" [disabled]="!carForm.valid">Agregar Auto</ion-button>
+    <ion-button (click)="goToCarList()">Cancelar</ion-button>
+  </form>
+</ion-content>

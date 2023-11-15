@@ -34,7 +34,9 @@
       <ion-label>Disponible</ion-label>
       <ion-checkbox formControlName="available"></ion-checkbox>
     </ion-item>
-
+    <ion-item>
+      <input type="file" formControlName="image" accept="image/*">
+    </ion-item>
     <ion-button type="submit" [disabled]="!carForm.valid">Agregar Auto</ion-button>
     <ion-button (click)="goToCarList()">Cancelar</ion-button>
   </form>

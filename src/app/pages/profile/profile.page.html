@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-button (click)="goToHome();"> Volver al inicio </ion-button>
+  <ion-card *ngIf="user">
+    <ion-card-content>
+      <ion-card-title>{{ user.username }}</ion-card-title>
+      <ion-card-subtitle>{{ user.email }}</ion-card-subtitle>
+    </ion-card-content>
+    <ion-card-content>
+      <p>Teléfono: {{ user.phonenumber }}</p>      
+  </ion-card-content>
+  </ion-card>
+  <div *ngIf="!user" class="ion-text-center">
+    <p>El usuario no existe o no se ha cargado.</p>
+  </div>
+</ion-content>
+

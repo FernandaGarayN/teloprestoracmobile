@@ -17,6 +17,9 @@ export class HomePage {
   goToCars(){
     this.router.navigateByUrl('cars')
   }
+  goToProfile(){
+    this.router.navigateByUrl('profile')
+  }
 
   logout(){
     this.authService.logout()

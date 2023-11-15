@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Car } from 'src/app/models/car';
 import { CarService } from 'src/app/services/car.service';
 
@@ -14,7 +14,7 @@ export class CarsPage implements OnInit {
   cars$!: Observable<Car[]>;
   enableDelete: boolean = false;
   carsToDelete: string [] = [];
-
+  filteredCars$!: Observable<Car[]>;
 
   constructor(
     private carService: CarService,
@@ -23,6 +23,7 @@ export class CarsPage implements OnInit {
 
   ngOnInit() {
     this.cars$ = this.carService.getAllCars();
+    this.filteredCars$ = this.cars$;
   }
 
   goToHome() {
@@ -45,6 +46,20 @@ export class CarsPage implements OnInit {
       this.carsToDelete = this.carsToDelete.filter(c => c !== car.id);
     } else {
       this.carsToDelete.push(car.id);
+    }
+  }
+  filterCars(searchTerm: string|undefined|null) {
+    if(searchTerm && searchTerm.length>0){
+      this.filteredCars$ = this.cars$.pipe(
+        map(cars => cars.filter(car => 
+          car.brand.toLowerCase().includes(searchTerm.toLowerCase()) || 
+          car.model.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          car.plateCode.toLowerCase().includes(searchTerm.toLowerCase())
+        ))
+      );
+    }
+    else{
+      this.filteredCars$ = this.cars$;
     }
   }
 

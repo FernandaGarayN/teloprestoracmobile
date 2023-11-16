@@ -27,5 +27,7 @@ export class CarsDetailPage implements OnInit {
   goToCars(){
     this.router.navigateByUrl('cars')
   }
-
+  goToHome(){
+    this.router.navigateByUrl('home')
+  }
 }

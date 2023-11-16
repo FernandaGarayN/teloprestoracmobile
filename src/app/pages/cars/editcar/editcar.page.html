@@ -4,6 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content [fullscreen]="true">
   <form [formGroup]="carForm" (ngSubmit)="editCar()">
     <ion-item>
@@ -38,4 +39,5 @@
     <ion-button type="submit" [disabled]="!carForm.valid">Modificar</ion-button>
     <ion-button (click)="goToCarList()">Cancelar</ion-button>
   </form>
+  <ion-button (click)="goToHome();"> Volver al Inicio </ion-button>
 </ion-content>

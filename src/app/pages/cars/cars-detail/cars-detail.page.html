@@ -6,6 +6,8 @@
 
 <ion-content [fullscreen]="true">
   <ion-button (click)="goToCars();"> Volver a la lista de Vehículos </ion-button>
+  <ion-button (click)="goToHome();"> Volver al Inicio </ion-button>
+
   <ion-card *ngIf="car">
     <ion-card-content>
       <ion-card-title>{{ car.brand }}</ion-card-title>

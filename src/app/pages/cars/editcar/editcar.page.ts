@@ -59,6 +59,9 @@ export class EditcarPage implements OnInit {
   goToCarList() {
     this.router.navigateByUrl('cars');
   }
+  goToHome() {
+    this.router.navigateByUrl('home');
+  }
   editCar() {
     const editedCar: Car = this.carForm.value;
     this.carService.updateCar(this.carId, editedCar).then(() => {

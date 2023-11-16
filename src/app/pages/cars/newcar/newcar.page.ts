@@ -30,12 +30,14 @@ export class NewcarPage implements OnInit {
       color: ['', Validators.required],
       plateCode: ['', Validators.required],
       available: [true, Validators.required],
+      image: [null, Validators.required],
     });
   }
   async addCar() {
     if (this.carForm.valid) {
       const newCar: Car = this.carForm.value;
-      await this.carService.addCar(newCar);
+      const imageFile = this.carForm.get('image')?.value;
+      await this.carService.addCar(newCar, imageFile);
 
       // Limpiar el formulario después de agregar un nuevo coche
       this.carForm.reset();

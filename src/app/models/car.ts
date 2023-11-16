@@ -7,4 +7,5 @@ export class Car {
     color!: string;
     plateCode!: string; 
     available!: boolean;
+    imageURL?: string;
 }

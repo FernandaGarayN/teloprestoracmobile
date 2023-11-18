@@ -30,7 +30,7 @@ export class NewcarPage implements OnInit {
       color: ['', Validators.required],
       plateCode: ['', Validators.required],
       available: [true, Validators.required],
-      image: [null, Validators.required],
+      imageURL: [null, Validators.required],
     });
   }
   async addCar() {

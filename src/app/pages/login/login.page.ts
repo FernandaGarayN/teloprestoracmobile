@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Firestore, addDoc, collection } from '@angular/fire/firestore';
-import { User } from 'src/app/models/user';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -12,12 +12,12 @@ import { User } from 'src/app/models/user';
 })
 export class LoginPage implements OnInit {
   credentials!: FormGroup;
-  errorMessage!: string;
   firestore: Firestore = inject(Firestore);
   constructor(
     private authService: AuthService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toastController: ToastController
   ) {}
 
   get email() {
@@ -32,13 +32,14 @@ export class LoginPage implements OnInit {
     const user = await this.authService.register(this.credentials.value);
     if (user) {
       const userprofile = {
-        email: this.credentials.get('email')?.value
+        email: this.credentials.get('email')?.value,
       };
       const collectionRef = collection(this.firestore, 'users');
       await addDoc(collectionRef, userprofile);
       this.router.navigateByUrl('/home', { replaceUrl: true });
     } else {
       console.log('error al registrar');
+      await this.toastErrorMessage('El correo que intenta registrar ya existe');
     }
   }
   ngOnInit() {
@@ -55,7 +56,17 @@ export class LoginPage implements OnInit {
       this.router.navigateByUrl('/home', { replaceUrl: true });
     } else {
       console.log('error al ingresar');
-      this.errorMessage = 'Correo y o contraseña invalido';
+      await this.toastErrorMessage('Correo y/o contraseña inválidos');
     }
+  }
+
+  async toastErrorMessage(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: 'middle',
+      color: 'danger',
+    });
+    toast.present();
   }
 }

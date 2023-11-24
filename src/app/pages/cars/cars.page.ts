@@ -35,11 +35,15 @@ export class CarsPage implements OnInit {
   enableDeleteFn(){
     this.enableDelete = true;
   }
+  cancelDelete(){
+    this.enableDelete = false;
+  }
   deleteCars() {
     this.carsToDelete.forEach(carId => this.carService.deleteCar(carId))
     this.carsToDelete = [];
     this.enableDelete = false;
   }
+  
   toggleDelete(car: Car) {
     // Verificar si el coche ya está en la lista para eliminar
     if (this.carsToDelete.includes(car.id)) {

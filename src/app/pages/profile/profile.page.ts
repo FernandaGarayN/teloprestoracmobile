@@ -45,4 +45,7 @@ export class ProfilePage implements OnInit {
   goToHome(){
     this.router.navigateByUrl('home')
   }
+  goToEditProfile() {
+    this.router.navigateByUrl('profile/edit');
+  }
 }

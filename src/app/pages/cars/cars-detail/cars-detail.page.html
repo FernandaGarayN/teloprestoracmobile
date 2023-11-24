@@ -1,28 +1,36 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Detalle de vehiculo</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="goToCars();" fill="clear">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Detalle de vehículo</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-button (click)="goToCars();"> Volver a la lista de Vehículos </ion-button>
-  <ion-button (click)="goToHome();"> Volver al Inicio </ion-button>
-
+<ion-content [fullscreen]="true" class="ion-padding">
   <ion-card *ngIf="car">
+    <ion-img [src]="car.imageURL" alt="Imagen del vehículo" style="width: 100%; height: 300px;"></ion-img>
     <ion-card-content>
       <ion-card-title>{{ car.brand }}</ion-card-title>
       <ion-card-subtitle>{{ car.model }}</ion-card-subtitle>
     </ion-card-content>
     <ion-card-content>
       <p>Año: {{ car.year }}</p>      
-      <p>Precio: {{ car.price }}</p>  
+      <p>Precio: {{ car.price | currency:'USD':'symbol':'1.2-2' }}</p>
       <p>Color: {{ car.color }}</p> 
       <p>Patente: {{ car.plateCode }}</p> 
       <p>Disponible: {{ car.available ? 'Sí' : 'No' }}</p>
     </ion-card-content>
   </ion-card>
-  <div *ngIf="!car" class="ion-text-center">
+
+  <ion-button (click)="goToCars();" expand="full" class="ion-margin-top">
+    <ion-icon name="car-sport"></ion-icon>
+    Volver a la lista de Vehículos
+  </ion-button>
+
+  <div *ngIf="!car" class="ion-text-center ion-margin-top">
     <p>El vehículo no existe o no se ha cargado.</p>
   </div>
 </ion-content>
-

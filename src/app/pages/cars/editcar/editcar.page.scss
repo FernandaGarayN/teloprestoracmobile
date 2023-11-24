@@ -1,0 +1,17 @@
+.image-text-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .image-container {
+    margin-right: 10px; /* Ajusta el espacio entre la imagen y el texto según tus preferencias */
+  }
+  
+  .image-thumbnail {
+    max-width: 100%;
+    max-height: 100px;
+  }
+  
+  .text-container {
+    flex: 1; /* Hace que el contenedor de texto ocupe el espacio restante */
+  }

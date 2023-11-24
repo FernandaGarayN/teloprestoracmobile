@@ -3,11 +3,28 @@
     <ion-title>
       Te lo Presto Rent a Car!
     </ion-title>
-    <ion-button (click)="logout();"> Cerrar sesión </ion-button>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToProfile();" fill="clear">
+        <ion-icon name="person"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)="logout();" fill="clear">
+        <ion-icon name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-button (click)="goToCars();"> Ir a la lista de Vehículos </ion-button>
-  <ion-button (click)="goToProfile();"> Ir al Perfil de usuario </ion-button>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="ion-text-center">
+    <h2>Bienvenido a Te lo Presto Rent-a-Car!</h2>
+    <p>Encuentra el vehículo perfecto para tu viaje.</p>
+  </div>
+
+  <div class="ion-margin-top ion-text-center">
+    <!-- Botones como iconos -->
+    <ion-button (click)="goToCars();" fill="clear">
+      <ion-icon name="car"></ion-icon>
+    </ion-button>
+  </div>
 </ion-content>

@@ -39,6 +39,7 @@ export class EditcarPage implements OnInit {
       color: ['', Validators.required],
       plateCode: ['', Validators.required],
       available: [true, Validators.required],
+      imageUrl: ['', Validators.required],
     });
   }
 
@@ -52,6 +53,7 @@ export class EditcarPage implements OnInit {
         color: car.color,
         plateCode: car.plateCode,
         available: car.available,
+        imageUrl: car.imageURL || ''
       });
     });
   }

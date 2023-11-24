@@ -1,22 +1,54 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goToHome();" fill="clear">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>Lista de vehículos</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-button (click)="goToHome();"> Volver al Inicio </ion-button>
-  <ion-button (click)="goToNew();"> Nuevo vehículo </ion-button>
-  <ion-button *ngIf = "!enableDelete" (click)="enableDeleteFn();"> Eliminar vehículos </ion-button>
-  <ion-searchbar (ionInput)="filterCars($event.detail.value)"></ion-searchbar>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-buttons class="ion-margin-bottom">
+    <ion-button *ngIf="!enableDelete" (click)="goToNew();" fill="clear">
+      <ion-icon name="add"></ion-icon>
+      Nuevo vehículo
+    </ion-button>
+
+    <ion-button *ngIf="!enableDelete" (click)="enableDeleteFn();" fill="clear">
+      <ion-icon name="trash"></ion-icon>
+      Eliminar vehículos
+    </ion-button>
+    <ion-button *ngIf="enableDelete" (click)="cancelDelete();" fill="clear">
+      <ion-icon name="close"></ion-icon>
+      Cancelar
+    </ion-button>
+  </ion-buttons>
+
+  <ion-searchbar (ionInput)="filterCars($event.detail.value)" placeholder="Buscar vehículo"></ion-searchbar>
+
   <ion-list>
     <ion-item *ngFor="let car of filteredCars$ | async">
-      <ion-checkbox (ionChange)="toggleDelete(car)" *ngIf = "enableDelete" labelPlacement="end"></ion-checkbox>
-      <ion-label>{{car.brand}} {{car.model}} / {{car.plateCode}}</ion-label>
-      <ion-button [disabled] = "!car.available" [routerLink] = "['/cars',car.id]">ver detalles</ion-button>
-      <ion-button [routerLink]="['/cars/edit',car.id]">Editar</ion-button>
+      <ion-checkbox *ngIf="enableDelete" (ionChange)="toggleDelete(car)" slot="start"></ion-checkbox>
+      <ion-label>{{ car.brand }} {{ car.model }} / {{ car.plateCode }}</ion-label>
 
+      <ion-buttons slot="end">
+        <ion-button [disabled]="!car.available" [routerLink]="['/cars', car.id]" fill="clear">
+          <ion-icon name="eye"></ion-icon>
+          Ver detalles
+        </ion-button>
+
+        <ion-button [routerLink]="['/cars/edit', car.id]" fill="clear">
+          <ion-icon name="create"></ion-icon>
+          Editar
+        </ion-button>
+      </ion-buttons>
     </ion-item>
   </ion-list>
-  <ion-button [disabled] = "carsToDelete.length === 0" *ngIf ="enableDelete" (click)="deleteCars();"> Eliminar </ion-button>
+
+  <ion-button [disabled]="carsToDelete.length === 0" *ngIf="enableDelete" (click)="deleteCars();" expand="full">
+    <ion-icon name="trash"></ion-icon>
+    Eliminar
+  </ion-button>
 </ion-content>

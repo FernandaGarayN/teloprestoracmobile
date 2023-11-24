@@ -1,43 +1,75 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goToHome();" fill="clear">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>Editar Vehículo</ion-title>
   </ion-toolbar>
 </ion-header>
 
-
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
   <form [formGroup]="carForm" (ngSubmit)="editCar()">
+
+    <ion-item class="image-text-container">
+      <div class="image-container">
+        <!-- Verifica si hay un valor en imageUrl -->
+        <ion-icon *ngIf="!carForm.get('imageUrl')?.value" name="image"></ion-icon>
+        <!-- Verifica si hay un valor en imageUrl y muestra la imagen o el ícono predeterminado -->
+        <img *ngIf="carForm.get('imageUrl')?.value" [src]="carForm.get('imageUrl')?.value" alt="Miniatura" class="image-thumbnail">
+      </div>
+      <!-- Agrega un div para el texto (mostrado solo si no hay imagen) -->
+      <div class="text-container" *ngIf="!carForm.get('imageUrl')?.value">
+        <p>Este vehículo no tiene imagen asociada</p>
+      </div>
+    </ion-item>
+    
     <ion-item>
       <ion-label position="floating">Marca</ion-label>
       <ion-input formControlName="brand" type="text"></ion-input>
     </ion-item>
+
     <ion-item>
       <ion-label position="floating">Modelo</ion-label>
       <ion-input formControlName="model" type="text"></ion-input>
     </ion-item>
+
     <ion-item>
       <ion-label position="floating">Año</ion-label>
       <ion-input formControlName="year" type="number"></ion-input>
     </ion-item>
+
     <ion-item>
       <ion-label position="floating">Precio</ion-label>
       <ion-input formControlName="price" type="number"></ion-input>
     </ion-item>
+
     <ion-item>
       <ion-label position="floating">Color</ion-label>
       <ion-input formControlName="color" type="text"></ion-input>
     </ion-item>
+
     <ion-item>
       <ion-label position="floating">Placa patente</ion-label>
       <ion-input formControlName="plateCode" type="text"></ion-input>
     </ion-item>
+
     <ion-item>
       <ion-label>Disponible</ion-label>
       <ion-checkbox formControlName="available"></ion-checkbox>
     </ion-item>
 
-    <ion-button type="submit" [disabled]="!carForm.valid">Modificar</ion-button>
-    <ion-button (click)="goToCarList()">Cancelar</ion-button>
+    <ion-buttons class="ion-margin-top">
+      <ion-button expand="full" type="submit" [disabled]="!carForm.valid">
+        <ion-icon name="car-sport"></ion-icon>
+        Guardar cambios
+      </ion-button>
+
+      <ion-button expand="full" fill="clear" (click)="goToCarList()">
+        <ion-icon name="close-circle"></ion-icon>
+        Cancelar
+      </ion-button>
+    </ion-buttons>
   </form>
-  <ion-button (click)="goToHome();"> Volver al Inicio </ion-button>
 </ion-content>

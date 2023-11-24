@@ -1,0 +1,52 @@
+<!-- edit-profile.page.html -->
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goToProfile();" fill="clear">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Editar Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <form [formGroup]="profileForm" (ngSubmit)="saveChanges()">
+    <ion-item class="image-text-container">
+      <div class="image-container">
+        <!-- Verifica si hay un valor en imageUrl -->
+        <ion-icon *ngIf="!profileForm.get('imageUrl')?.value" name="image"></ion-icon>
+        <!-- Verifica si hay un valor en imageUrl y muestra la imagen o el ícono predeterminado -->
+        <img *ngIf="profileForm.get('imageUrl')?.value" [src]="profileForm.get('imageUrl')?.value" alt="Miniatura" class="image-thumbnail">
+      </div>
+      <!-- Agrega un div para el texto (mostrado solo si no hay imagen) -->
+      <div class="text-container" *ngIf="!profileForm.get('imageUrl')?.value">
+        <p>Este perfil no tiene imagen asociada</p>
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Nombre de Usuario</ion-label>
+      <ion-input formControlName="username" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Número de Teléfono</ion-label>
+      <ion-input formControlName="phonenumber" type="tel"></ion-input>
+    </ion-item>
+
+    <ion-item class="image-upload-container">
+      <label class="image-upload-button">
+        <ion-icon name="camera"></ion-icon> Subir Imagen
+        <input type="file" formControlName="imageUrl" accept="image/*" class="input-file" (change)="onFileChosen($event)">
+      </label>
+    </ion-item>
+
+    <ion-buttons class="ion-margin-top">
+      <ion-button expand="full" type="submit" [disabled]="!profileForm.valid">
+        <ion-icon name="person-add-outline"></ion-icon>
+        Guardar
+      </ion-button>
+    </ion-buttons>
+  </form>
+</ion-content>

@@ -1,22 +1,36 @@
+<!-- profile.page.html -->
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goToHome();" fill="clear">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>Perfil</ion-title>
+    <ion-buttons slot="end">
+      <!-- Agrega el botón de edición -->
+      <ion-button (click)="goToEditProfile()" fill="clear">
+        <ion-icon name="create"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-button (click)="goToHome();"> Volver al inicio </ion-button>
-  <ion-card *ngIf="user">
-    <ion-card-content>
-      <ion-card-title>{{ user.username }}</ion-card-title>
-      <ion-card-subtitle>{{ user.email }}</ion-card-subtitle>
-    </ion-card-content>
-    <ion-card-content>
-      <p>Teléfono: {{ user.phonenumber }}</p>      
-  </ion-card-content>
-  </ion-card>
-  <div *ngIf="!user" class="ion-text-center">
-    <p>El usuario no existe o no se ha cargado.</p>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="ion-text-center">
+    <ion-card *ngIf="user">
+      <ion-card-header>
+        <ion-card-title>{{ user.username }}</ion-card-title>
+        <ion-card-subtitle>{{ user.email }}</ion-card-subtitle>
+      </ion-card-header>
+  
+      <ion-card-content>
+        <p>Teléfono: {{ user.phonenumber }}</p>      
+      </ion-card-content>
+    </ion-card>
+  
+    <div *ngIf="!user" class="ion-text-center">
+      <p>El usuario no existe o no se ha cargado.</p>
+    </div>
   </div>
 </ion-content>
-

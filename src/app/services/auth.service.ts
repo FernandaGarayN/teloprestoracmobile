@@ -13,8 +13,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private currentUserSubject: BehaviorSubject<User | null> =
-    new BehaviorSubject<User | null>(null);
+  private currentUserSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSubject.asObservable();
 
   constructor(private auth: Auth) {
@@ -48,6 +47,11 @@ export class AuthService {
       console.log(e);
       return null;
     }
+  }
+  
+  notifyUserChanges() {
+    const currentUser = this.currentUserSubject.value;
+    this.currentUserSubject.next(currentUser);
   }
 
   logout() {

@@ -36,12 +36,10 @@
       <ion-buttons slot="end">
         <ion-button [disabled]="!car.available" [routerLink]="['/cars', car.id]" fill="clear">
           <ion-icon name="eye"></ion-icon>
-          Ver detalles
         </ion-button>
 
         <ion-button [routerLink]="['/cars/edit', car.id]" fill="clear">
           <ion-icon name="create"></ion-icon>
-          Editar
         </ion-button>
       </ion-buttons>
     </ion-item>

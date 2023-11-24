@@ -11,6 +11,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { FirestoreService } from 'src/app/services/firestore.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -19,12 +21,15 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class EditProfilePage implements OnInit {
   file!: File;
-  user!: User;
+  userId!: string;
+  email!: string;
   profileForm!: FormGroup;
   firestore: Firestore = inject(Firestore);
 
   constructor(
     private authService: AuthService,
+    private firestoreService: FirestoreService,
+    private userService: UserService,
     private formBuilder: FormBuilder,
     private router: Router,
     private ngZone: NgZone
@@ -54,10 +59,12 @@ export class EditProfilePage implements OnInit {
     querySnapshot.forEach((doc) => {
       console.log(doc.id, ' => ', doc.data());
       this.ngZone.run(() => {
+        this.userId = doc.id;
+        this.email = doc.get('email');
         this.profileForm.setValue({
           username: doc.get('username'),
           phonenumber: doc.get('phonenumber'),
-          imageUrl: ''
+          imageUrl: doc.get('imageUrl') || ''
         });
       });
     });
@@ -78,14 +85,34 @@ export class EditProfilePage implements OnInit {
     }
   }
 
-  saveChanges() {
-    const editedUser: User = this.profileForm.value;
+ async saveChanges() {
+    if (this.profileForm.valid) {
+      const editedUser: User = this.profileForm.value;
+      editedUser.email = this.email;
+      if (this.file) {
+        const filePath = this.createFilePath(editedUser, this.file);
+        editedUser.imageUrl = await this.firestoreService.uploadFile(this.file, filePath);
+      }
+      await this.userService.edit(this.userId, editedUser);
+      this.authService.notifyUserChanges();
+      this.goToProfile();
+    }
+  }
 
-    // Llama a un servicio que actualiza la información del usuario
-    // authService.updateUserProfile(updatedUserData).then(() => {
-    //   Puedes manejar la redirección o mostrar un mensaje de éxito
-    //   this.router.navigate(['profile']);
-    // });
+  private createFilePath(aUser: User, file: File) {
+    return `user_images/${aUser.username}_profile.${this.getFileExtension(file)}`;
+  }
+
+  private getFileExtension(file?: File) {
+    const fileName = file?.name;
+    console.log('fileName=' + fileName);
+    if (fileName) {
+      const fileExtension = fileName.split('.').pop(); // Obtener la última parte después del último punto
+      console.log('fileExtension=' + fileExtension);
+      return fileExtension;
+    } else {
+      return '';
+    }
   }
 
   goToProfile() {

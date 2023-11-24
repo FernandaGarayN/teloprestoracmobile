@@ -41,7 +41,7 @@ export class NewcarPage implements OnInit {
       const newCar: Car = this.carForm.value;
       const filePath = this.createFilePath(newCar, this.file);
       newCar.imageURL = await this.firestoreService.uploadFile(this.file, filePath);
-      await this.carService.addCar(newCar, this.file);
+      await this.carService.addCar(newCar);
 
       // Limpiar el formulario después de agregar un nuevo coche
       this.carForm.reset();

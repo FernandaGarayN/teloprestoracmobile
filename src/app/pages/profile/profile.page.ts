@@ -40,6 +40,7 @@ export class ProfilePage implements OnInit {
       this.user.phonenumber = doc.get('phonenumber');
       this.user.id = doc.id;
       this.user.username = doc.get('username');
+      this.user.imageUrl = doc.get('imageUrl');
     });
   }
   goToHome(){

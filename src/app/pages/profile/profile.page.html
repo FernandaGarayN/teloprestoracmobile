@@ -19,6 +19,10 @@
 <ion-content [fullscreen]="true" class="ion-padding">
   <div class="ion-text-center">
     <ion-card *ngIf="user">
+      <!-- Muestra la imagen de perfil o una por defecto si no hay imagen -->
+      <ion-avatar class="profile-image">
+        <ion-img [src]="user.imageUrl || 'assets/default-profile-image.jpg'" alt="Imagen de perfil"></ion-img>
+      </ion-avatar>
       <ion-card-header>
         <ion-card-title>{{ user.username }}</ion-card-title>
         <ion-card-subtitle>{{ user.email }}</ion-card-subtitle>

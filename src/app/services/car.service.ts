@@ -29,10 +29,8 @@ export class CarService {
     const carRef = doc(this.firestore, `cars/${carId}`);
     return docData(carRef) as Observable<Car>;
   }
-  async addCar(newCar: Car, imageFile?: File): Promise<void> {
-    if (imageFile) {
-      addDoc(collection(this.firestore, 'cars'), newCar);
-    }
+  async addCar(newCar: Car): Promise<void> {
+    await addDoc(collection(this.firestore, 'cars'), newCar);
   }
   async updateCar(carId: string, updatedCar: Car): Promise<void> {
     const carRef = doc(this.firestore, 'cars', carId);
